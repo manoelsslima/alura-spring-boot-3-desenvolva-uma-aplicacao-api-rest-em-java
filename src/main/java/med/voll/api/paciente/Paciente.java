@@ -23,6 +23,7 @@ public class Paciente {
     private String email;
     private String cpf;
     private String telefone;
+    private Boolean ativo;
 
     @Embedded
     private Endereco endereco;
@@ -33,6 +34,7 @@ public class Paciente {
         this.telefone = dados.telefone();
         this.cpf = dados.cpf();
         this.endereco = new Endereco(dados.endereco());
+        this.ativo = true;
     }
 
     public void atualizarInformacoes(@Valid DadosAtualizacaoPaciente dados) {
@@ -45,5 +47,9 @@ public class Paciente {
         if (dados.endereco() != null) {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
+    }
+
+    public void inativar() {
+        this.ativo = false;
     }
 }
